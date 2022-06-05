@@ -1,9 +1,11 @@
 from ast import Break
 from lib2to3.pgen2 import token
 from xml.dom.minidom import CharacterData
-import discord, asyncio, random, json
+import discord, asyncio, random, json, os
 from discord.ext import commands
+from dotenv import load_dotenv
 
+load_dotenv()
 gameCommands = ["!hp","!attack","!defense","!stats"]
 players = {
     "EMPTYUSER" : {
@@ -17,7 +19,6 @@ players = {
     }
 }
 
-TOKEN = 'OTgyNTMwODQxOTExNjU2NDQ4.Gn2xOP.PhKhabeAELW5hYhE1pYqviUBQgb7XzvxDwazJk'
 client = commands.Bot(command_prefix=["dnd!"],help_command=None)
 
 async def gameLoop(boundChannel):
@@ -83,4 +84,4 @@ async def on_message(message):
         except:
             await message.channel.send("An error occured.")
 
-client.run(TOKEN)
+client.run(os.getenv("DISCORD_TOKEN"))
